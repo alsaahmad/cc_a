@@ -1,82 +1,206 @@
-// ---------------------------
-// Add User to LocalStorage
-// ---------------------------
-function addUser() {
-    const name = document.getElementById("name").value;
-    const skill = document.getElementById("skill").value;
-    const cgpa = document.getElementById("cgpa")?.value || "";
+/* ================================
+   CAMPUSCONNECT – LOCAL STORAGE JS
+   ================================ */
 
-    if (!name || !skill) {
-        alert("Please fill all fields!");
+/* ========= SIGNUP ========= */
+function signupUser() {
+    let name = document.getElementById("signupName").value;
+    let email = document.getElementById("signupEmail").value;
+    let password = document.getElementById("signupPassword").value;
+
+    if (!name || !email || !password) {
+        alert("All fields are required!");
         return;
     }
 
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    users.push({ name, skill, cgpa });
+    // Check if email already exists
+    if (users.some(u => u.email === email)) {
+        alert("User already exists!");
+        return;
+    }
+
+    let newUser = {
+        name,
+        email,
+        password,
+        skills: [],
+        groups: [],
+        profile: {}
+    };
+
+    users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
-    alert("User added successfully!");
-    loadUsers();
+    alert("Signup successful! You can now login.");
+    window.location.href = "login.html";
 }
 
+/* ========= LOGIN ========= */
+function loginUser() {
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
 
-// ---------------------------
-// Load Users (Dashboard Page)
-// ---------------------------
-function loadUsers() {
     let users = JSON.parse(localStorage.getItem("users")) || [];
-    const list = document.getElementById("usersList");
 
-    if (!list) return;
+    let user = users.find(u => u.email === email && u.password === password);
 
-    list.innerHTML = users
-        .map(u => `<li><b>${u.name}</b> — ${u.skill} (CGPA: ${u.cgpa || "NA"})</li>`)
-        .join("");
-}
-
-
-// ---------------------------
-// Create Study Group
-// ---------------------------
-function createGroup() {
-    const groupName = document.getElementById("groupName").value;
-    const groupTopic = document.getElementById("groupTopic").value;
-
-    if (!groupName || !groupTopic) {
-        alert("Fill all fields!");
+    if (!user) {
+        alert("Invalid email or password!");
         return;
     }
 
-    let groups = JSON.parse(localStorage.getItem("groups")) || [];
+    localStorage.setItem("loggedInUser", email);
+    window.location.href = "dashboard.html";
+}
 
-    groups.push({ groupName, groupTopic });
-    localStorage.setItem("groups", JSON.stringify(groups));
+/* ========= CHECK LOGIN ========= */
+function getLoggedInUser() {
+    let email = localStorage.getItem("loggedInUser");
+    if (!email) return null;
 
-    alert("Group Created!");
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    return users.find(u => u.email === email);
+}
+
+/* ========= LOGOUT ========= */
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+}
+
+/* ========= LOAD DASHBOARD ========= */
+function loadDashboard() {
+    let user = getLoggedInUser();
+    if (!user) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    document.getElementById("userName").innerText = user.name;
+    document.getElementById("userEmail").innerText = user.email;
+
+    loadSkills();
     loadGroups();
 }
 
+/* ========= SKILLS: ADD ========= */
+function addSkill() {
+    let user = getLoggedInUser();
+    let skill = document.getElementById("skillInput").value;
 
-// ---------------------------
-// Load Groups
-// ---------------------------
+    if (skill === "") {
+        alert("Enter a skill!");
+        return;
+    }
+
+    user.skills.push(skill);
+
+    updateUser(user);
+    loadSkills();
+
+    document.getElementById("skillInput").value = "";
+}
+
+/* ========= SKILLS: LOAD ========= */
+function loadSkills() {
+    let user = getLoggedInUser();
+    let box = document.getElementById("skillsList");
+
+    if (!box) return;
+
+    box.innerHTML = "";
+
+    user.skills.forEach((skill, index) => {
+        box.innerHTML += `
+            <div class="skill-item">
+                ${skill}
+                <button onclick="deleteSkill(${index})">X</button>
+            </div>
+        `;
+    });
+}
+
+/* ========= SKILLS: DELETE ========= */
+function deleteSkill(index) {
+    let user = getLoggedInUser();
+    user.skills.splice(index, 1);
+    updateUser(user);
+    loadSkills();
+}
+
+/* ========= GROUPS: ADD ========= */
+function addGroup() {
+    let user = getLoggedInUser();
+    let gname = document.getElementById("groupInput").value;
+
+    if (gname === "") {
+        alert("Enter group name!");
+        return;
+    }
+
+    user.groups.push(gname);
+
+    updateUser(user);
+    loadGroups();
+
+    document.getElementById("groupInput").value = "";
+}
+
+/* ========= GROUPS: LOAD ========= */
 function loadGroups() {
-    let groups = JSON.parse(localStorage.getItem("groups")) || [];
-    const list = document.getElementById("groupsList");
+    let user = getLoggedInUser();
+    let box = document.getElementById("groupsList");
 
-    if (!list) return;
+    if (!box) return;
 
-    list.innerHTML = groups
-        .map(g => `<li><b>${g.groupName}</b> — ${g.groupTopic}</li>`)
-        .join("");
+    box.innerHTML = "";
+
+    user.groups.forEach((g, index) => {
+        box.innerHTML += `
+            <div class="group-item">
+                ${g}
+                <button onclick="deleteGroup(${index})">X</button>
+            </div>
+        `;
+    });
 }
 
-
-// ---------------------------
-// Auto-load on page load
-// ---------------------------
-document.addEventListener("DOMContentLoaded", () => {
-    loadUsers();
+/* ========= GROUPS: DELETE ========= */
+function deleteGroup(i) {
+    let user = getLoggedInUser();
+    user.groups.splice(i, 1);
+    updateUser(user);
     loadGroups();
-});
+}
+
+/* ========= STUDENT DIRECTORY ========= */
+function loadDirectory() {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let box = document.getElementById("studentsBox");
+
+    if (!box) return;
+
+    box.innerHTML = "";
+
+    users.forEach(u => {
+        box.innerHTML += `
+            <div class="student-card">
+                <h3>${u.name}</h3>
+                <p>Email: ${u.email}</p>
+                <p>Skills: ${u.skills.join(", ") || "No skills added"}</p>
+            </div>
+        `;
+    });
+}
+
+/* ========= UPDATE USER ========= */
+function updateUser(updatedUser) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    let index = users.findIndex(u => u.email === updatedUser.email);
+    users[index] = updatedUser;
+
+    localStorage.setItem("users", JSON.stringify(users));
+}
