@@ -1,114 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Campus Connect — Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-  <header class="navbar">
-    <h2>Campus Connect</h2>
-    <nav class="navbar">
-      <a href="index.html">Home</a>
-      <a href="groups.html">Groups</a>
-      <a href="profile.html">Profile</a>
-      <a href="about.html">About</a>
-      <a class="btn btn-primary" href="login.html">Logout</a>
-    </nav>
-  </header>
 
-  <main class="container">
-    <div class="card" style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
-      <!-- Left column -->
-      <section style="flex:1 1 320px; min-width:280px;">
-        <h3>My Skills</h3>
+    <div class="dashboard-container">
+        <h1>Welcome to Your Dashboard</h1>
 
-        <!-- Add Skill Form -->
-        <form id="addSkillForm" class="card">
-          <label for="skillName">Add Skill</label>
-          <input id="skillName" class="input" placeholder="e.g. Data Structures, React" />
-          <label for="skillLevel">Level</label>
-          <select id="skillLevel" class="input">
-            <option>Beginner</option>
-            <option>Intermediate</option>
-            <option>Advanced</option>
-          </select>
-          <button type="submit" class="btn btn-primary" style="margin-top:8px;">Add Skill</button>
-        </form>
+        <!-- ⭐ USER DETAILS PLACED HERE -->
+        <h2 id="userName"></h2>
+        <p id="userEmail"></p>
 
-        <!-- View My Skills -->
-        <div class="card" id="mySkillsList">
-          <h4>Your Skills</h4>
-          <div id="skillsContainer">
-            <!-- JS will render skill chips here -->
-            <span class="tag">AI • Advanced</span>
-            <span class="tag">Web Dev • Intermediate</span>
-          </div>
-        </div>
+        <hr>
 
-        <!-- User details (selected from People list) -->
-        <div class="card" id="userDetails">
-          <h4>User Details</h4>
-          <p><strong id="detailName">Name:</strong> <span id="detailNameVal">—</span></p>
-          <p><strong id="detailDept">Dept:</strong> <span id="detailDeptVal">—</span></p>
-          <p><strong id="detailInterests">Interests:</strong> <span id="detailInterestsVal">—</span></p>
-          <div id="detailActions" style="margin-top:8px;">
-            <button id="messageBtn" class="btn btn-outline">Message</button>
-            <button id="connectBtn" class="btn btn-primary">Connect</button>
-          </div>
-        </div>
-      </section>
+        <!-- ⭐ SKILL INPUT SECTION HERE -->
+        <h3>Add Your Skills</h3>
 
-      <!-- Right column: Explore people & students list -->
-      <aside style="flex:1 1 420px; min-width:300px;">
-        <div class="card">
-          <h3>Explore People</h3>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
-            <input id="searchPeople" class="input" placeholder="Search by interest, dept or name" />
-            <select id="filterYear" class="input" style="max-width:140px;">
-              <option value="">All years</option>
-              <option value="1">1st</option>
-              <option value="2">2nd</option>
-              <option value="3">3rd</option>
-              <option value="4">4th</option>
-            </select>
-          </div>
+        <input type="text" id="skillInput" placeholder="Enter a skill">
+        <button onclick="addSkill()">Add Skill</button>
 
-          <!-- Students list -->
-          <div id="studentsList" style="max-height:420px; overflow:auto;">
-            <!-- Example student item -->
-            <div class="list-item" data-email="riya@college.edu">
-              <div>
-                <strong>Riya Sharma</strong><br>
-                <small>CSE • 3rd Year • AI, ML</small>
-              </div>
-              <div style="text-align:right;">
-                <button class="btn btn-outline btn-sm viewProfileBtn">View</button>
-                <button class="btn btn-primary btn-sm connectBtn">Connect</button>
-              </div>
-            </div>
+        <!-- ⭐ DISPLAY SKILLS HERE -->
+        <div id="skillsList"></div>
 
-            <!-- JS will append more student items here -->
-          </div>
-        </div>
+        <br><br>
+        <button onclick="logoutUser()">Logout</button>
 
-        <div class="card" style="margin-top:16px;">
-          <h3>Quick Actions</h3>
-          <button id="createPostBtn" class="btn btn-primary">Create Post</button>
-          <button id="myGroupsBtn" class="btn btn-outline">My Groups</button>
-        </div>
-      </aside>
     </div>
-  </main>
 
-  <footer class="container footer">
-    <div>© <span id="yearDash"></span> Campus Connect</div>
-  </footer>
-
-  <script>
-    document.getElementById('yearDash').textContent = new Date().getFullYear();
-    // JS hooks: #addSkillForm, #skillsContainer, #studentsList, .viewProfileBtn, #userDetails
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
