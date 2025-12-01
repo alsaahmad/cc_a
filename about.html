@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Campus Connect — About & Help</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h2>Campus Connect</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="groups.html">Groups</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h2>About Campus Connect</h2>
+      <p>Campus Connect is an intracollege social platform to help students connect by interests, collaborate on projects, join study groups, and discover on-campus events.</p>
+
+      <h3 style="margin-top:14px;">Project Details</h3>
+      <ul>
+        <li>Tech stack: React (frontend) / Node.js + Express (backend) / PostgreSQL (DB)</li>
+        <li>Features: Interest matching, groups, events, chat, admin moderation</li>
+        <li>Privacy: College-only access via verified emails; secure auth & data protection</li>
+      </ul>
+
+      <h3 style="margin-top:14px;">Team Members</h3>
+      <ul>
+        <li>Ansh Bhardwaj — Frontend & Design</li>
+        <li>Member 2 — Backend & API</li>
+        <li>Member 3 — Database & DevOps</li>
+      </ul>
+
+      <h3 style="margin-top:14px;">Contact / Help</h3>
+      <p>If you need help, contact <strong>support@campusconnect.example</strong> or reach out to the project lead: <strong>Ansh Bhardwaj</strong>.</p>
+
+      <h4 style="margin-top:12px;">Frequently asked</h4>
+      <details>
+        <summary>How to join groups?</summary>
+        <p>Go to Groups → Explore → Click Join on a group. Private groups require invite or moderator approval.</p>
+      </details>
+
+      <details style="margin-top:8px;">
+        <summary>How to report inappropriate content?</summary>
+        <p>Open the post and click Report. Admins will review within 24 hours.</p>
+      </details>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <div>© <span id="yearAbout"></span> Campus Connect</div>
+  </footer>
+
+  <script>
+    document.getElementById('yearAbout').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

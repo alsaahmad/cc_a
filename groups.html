@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Campus Connect — Study Groups</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h2>Campus Connect</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card" style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
+      <!-- Left: Create group -->
+      <section style="flex:1 1 320px; min-width:280px;">
+        <div class="card">
+          <h3>Create Study Group</h3>
+          <form id="createGroupForm">
+            <label>Group Name</label>
+            <input id="groupName" class="input" placeholder="e.g. ML Study Circle" />
+            <label>Tags (comma separated)</label>
+            <input id="groupTags" class="input" placeholder="AI, ML, Data Science" />
+            <label>Description</label>
+            <textarea id="groupDesc" class="input" placeholder="Short description..."></textarea>
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              <button class="btn btn-primary" type="submit">Create Group</button>
+              <button id="clearGroupBtn" type="button" class="btn btn-outline">Clear</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- My groups (joined) -->
+        <div class="card" style="margin-top:16px;">
+          <h4>My Groups</h4>
+          <div id="myGroupsList">
+            <!-- Example -->
+            <div class="list-item">
+              <div><strong>Web Dev Club</strong><br><small>Frontend projects</small></div>
+              <div>
+                <button class="btn btn-outline btn-sm">Open</button>
+                <button class="btn btn-outline btn-sm leaveGroupBtn">Leave</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: browse & join groups -->
+      <aside style="flex:1 1 420px; min-width:300px;">
+        <div class="card">
+          <h3>Explore Groups</h3>
+          <input id="searchGroups" class="input" placeholder="Search groups by tag or name" />
+          <div id="groupsList" style="margin-top:12px; max-height:520px; overflow:auto;">
+            <!-- Example group item -->
+            <div class="list-item" data-group-id="g1">
+              <div>
+                <strong>AI Club</strong><br>
+                <small>Study ML together • 120 members</small>
+                <div style="margin-top:6px;"><span class="tag">AI</span> <span class="tag">ML</span></div>
+              </div>
+              <div style="text-align:right;">
+                <button class="btn btn-outline btn-sm viewGroupBtn">View</button>
+                <button class="btn btn-primary btn-sm joinGroupBtn">Join</button>
+              </div>
+            </div>
+
+            <!-- JS will render more groups here -->
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <div>© <span id="yearGroups"></span> Campus Connect</div>
+  </footer>
+
+  <script>
+    document.getElementById('yearGroups').textContent = new Date().getFullYear();
+    // JS hooks: #createGroupForm, #groupsList, #myGroupsList, .joinGroupBtn, .leaveGroupBtn
+  </script>
+</body>
+</html>

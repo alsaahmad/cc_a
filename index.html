@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Campus Connect — Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Full Navbar -->
+  <header class="navbar">
+    <h2>Campus Connect</h2>
+
+    <nav style="display:flex; gap:16px; align-items:center;">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="groups.html">Study Groups</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html">About</a>
+      <a href="login.html" class="btn btn-primary">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-left">
+        <h1>Welcome to <span class="brand">CampusConnect</span></h1>
+        <p class="tagline">Connecting students. Building communities.</p>
+        <p class="lead">
+          Find classmates who share your interests, join clubs, collaborate on projects,
+          and never miss campus events.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="signup.html">Create Profile</a>
+          <a class="btn ghost" href="groups.html">Explore Groups</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <div class="container">
+    <div class="card">
+      <h2>Welcome to Campus Connect</h2>
+      <p>A platform to connect students with similar interests.</p>
+      <br>
+      <a class="btn-btn-primary" href="signup.html">Get Started</a>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <main class="container main-grid">
+    <section class="feature">
+      <h3>Smart Interest Matching</h3>
+      <p>Get paired with students who share your skills and hobbies.</p>
+    </section>
+    <section class="feature">
+      <h3>Project Collaboration</h3>
+      <p>Create or join teams, manage tasks, and track progress.</p>
+    </section>
+    <section class="feature">
+      <h3>Clubs & Communities</h3>
+      <p>Discover clubs, join discussions, and attend events.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="container footer">
+    <div>Privacy • Terms • Contact</div>
+    <div>© <span id="year"></span> CampusConnect</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

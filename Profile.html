@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Campus Connect — Profile</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h2>Campus Connect</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="groups.html">Groups</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card" style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
+      <section style="flex:0 0 260px;">
+        <div style="text-align:center;">
+          <div class="avatar" id="profileAvatar"></div>
+          <h3 id="profileName">Your Name</h3>
+          <div id="profileMeta"><small id="profileDept">CSE • 3rd Year</small></div>
+          <button id="editAvatarBtn" class="btn btn-outline" style="margin-top:8px;">Change Avatar</button>
+        </div>
+
+        <div class="card" style="margin-top:12px;">
+          <h4>Quick Stats</h4>
+          <p><strong>CGPA:</strong> <span id="cgpaVal">8.6</span></p>
+          <p><strong>Projects:</strong> <span id="projCount">4</span></p>
+          <p><strong>Groups:</strong> <span id="groupCount">3</span></p>
+        </div>
+      </section>
+
+      <section style="flex:1 1 400px;">
+        <div class="card">
+          <h3>Edit Profile</h3>
+          <form id="profileEditForm">
+            <label>Full Name</label>
+            <input id="fullName" class="input" value="Your Name" />
+
+            <label>Department & Year</label>
+            <input id="deptYear" class="input" value="CSE • 3rd Year" />
+
+            <label>CGPA</label>
+            <input id="cgpa" class="input" value="8.6" />
+
+            <label>Interests (comma separated)</label>
+            <input id="interests" class="input" value="AI, Web Dev" />
+
+            <label>Skills (add comma separated)</label>
+            <input id="skills" class="input" value="React, Python" />
+
+            <label>Bio</label>
+            <textarea id="bio" class="input">Brief about yourself...</textarea>
+
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+              <button id="cancelEdit" class="btn btn-outline" type="button">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card" style="margin-top:12px;">
+          <h4>Public Profile Preview</h4>
+          <p><strong id="previewName">Your Name</strong> — <small id="previewDept">CSE • 3rd Year</small></p>
+          <p id="previewBio">Brief about yourself...</p>
+          <div id="previewTags"><span class="tag">AI</span> <span class="tag">Web Dev</span></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <div>© <span id="yearProfile"></span> Campus Connect</div>
+  </footer>
+
+  <script>
+    document.getElementById('yearProfile').textContent = new Date().getFullYear();
+    // JS hooks: #profileEditForm, #previewName, #previewBio, #previewTags, #editAvatarBtn
+  </script>
+</body>
+</html>
